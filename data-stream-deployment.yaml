@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-stream
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-stream
+  template:
+    metadata:
+      labels:
+        app: data-stream
+    spec:
+      containers:
+      - name: data-stream
+        image: myregistry/data-stream:latest
+        env:
+        - name: KAFKA_BROKER
+          value: "kafka-service:9092"
